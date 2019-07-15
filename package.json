@@ -1,0 +1,60 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "umi test",
+    "precommit": "lint-staged",
+    "start": "electron app/dist/main/main",
+    "dev": "concurrently cross-env APP_TYPE=site \"npm run dev:renderer\" \"npm run dev:main\"",
+    "dev:main": "cross-env ESLINT=none BROWSER=none COMPRESS=none roadhog build -w",
+    "dev:renderer": "cross-env APP_ROOT=src/renderer BROWSER=none ESLINT=none umi dev",
+    "build": "npm run build:main && npm run build:renderer",
+    "build:main": "ESLINT=none roadhog build",
+    "build:renderer": "cross-env APP_ROOT=src/renderer ESLINT=none umi build",
+    "pack": "npm run build && npm run rebuild && build",
+    "pack:dir": "npm run build && npm run rebuild && build --dir",
+    "pack:dirOnly": "build --dir",
+    "rebuild": "electron-rebuild -m ./app",
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint:js": "eslint --ext .js src mock tests",
+    "lint:style": "stylelint \"src/**/*.less\" --syntax less"
+  },
+  "dependencies": {
+    "antd": "^3.19.5",
+    "dva": "^2.6.0-beta.6",
+    "electron": "^5.0.6",
+    "electron-builder": "^21.0.15",
+    "electron-rebuild": "^1.8.5",
+    "react": "^16.8.6",
+    "react-container-query": "^0.11.0",
+    "react-document-title": "^2.0.3",
+    "react-dom": "^16.8.6",
+    "umi-request": "^1.1.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.5.4",
+    "babel-eslint": "^9.0.0",
+    "concurrently": "^4.1.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "react-test-renderer": "^16.7.0",
+    "roadhog": "^0.6.1",
+    "umi": "^2.7.7",
+    "umi-plugin-react": "^1.8.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

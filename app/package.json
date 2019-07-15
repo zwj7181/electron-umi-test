@@ -1,0 +1,15 @@
+{
+  "name": "MedSuit-electron",
+  "version": "0.0.1",
+  "description": "Yet another boilerplate for umi+dva+electron.",
+  "main": "dist/main/main.js",
+  "author": {
+    "name": "lian-med",
+    "email": "lian-med@gmail.com"
+  },
+  "dependencies": {
+    "electron-config": "^2.0.0",
+    "electron-is": "^3.0.0",
+    "electron-log": "^3.0.1"
+  }
+}
